@@ -430,7 +430,7 @@ static const unsigned int smbchg_extcon_cable[] = {
 	EXTCON_NONE,
 };
 
-#define RUNIN_BATT_CAPACITY_CONTROL
+// #define RUNIN_BATT_CAPACITY_CONTROL
 #ifdef RUNIN_BATT_CAPACITY_CONTROL
 static int BatteryTestStatus_enable;
 static void runin_work(struct smbchg_chip *chip, int batt_capacity);
@@ -8651,6 +8651,7 @@ static int smbchg_probe(struct platform_device *pdev)
 
 #ifdef RUNIN_BATT_CAPACITY_CONTROL
 
+#define RUNIN_BATT_CAPACITY_CONTROL_ENABLED 1
 #ifdef RUNIN_BATT_CAPACITY_CONTROL_ENABLED
 	BatteryTestStatus_enable = 1;
 #endif

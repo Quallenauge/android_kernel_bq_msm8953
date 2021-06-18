@@ -378,6 +378,8 @@ struct device_node *of_batterydata_get_best_profile(
 	if (best_node == NULL) {
 		pr_err("No battery data found\n");
 		return best_node;
+	}else {
+		pr_err("Using battery profile: %s\n", best_node->name);
 	}
 
 	/* check that profile id is in range of the measured batt_id */

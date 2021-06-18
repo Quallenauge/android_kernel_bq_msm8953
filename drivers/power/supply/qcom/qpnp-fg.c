@@ -251,7 +251,7 @@ static struct fg_mem_setting settings[FG_MEM_SETTING_MAX] = {
 	SETTING(TERM_CURRENT,	 0x40C,   2,      250),
 	SETTING(CHG_TERM_CURRENT, 0x4F8,   2,      250),
 	SETTING(IRQ_VOLT_EMPTY,	 0x458,   3,      3100),
-	SETTING(CUTOFF_VOLTAGE,	 0x40C,   0,      3200),
+	SETTING(CUTOFF_VOLTAGE,	 0x40C,   0,      3150),
 	SETTING(VBAT_EST_DIFF,	 0x000,   0,      30),
 	SETTING(DELTA_SOC,	 0x450,   3,      1),
 	SETTING(BATT_LOW,	 0x458,   0,      4200),
@@ -314,7 +314,7 @@ static struct fg_mem_data fg_backup_regs[FG_BACKUP_MAX] = {
 	BACKUP(MAH_TO_SOC,	0x4A0,   0,      4,     -EINVAL),
 };
 
-static int fg_debug_mask;
+static int fg_debug_mask = FG_AGING | FG_IRQS | FG_STATUS;
 module_param_named(
 	debug_mask, fg_debug_mask, int, 00600
 );
@@ -443,7 +443,7 @@ static void fg_stay_awake(struct fg_wakeup_source *source)
 {
 	if (!__test_and_set_bit(0, &source->enabled)) {
 		__pm_stay_awake(&source->source);
-		pr_debug("enabled source %s\n", source->source.name);
+		//pr_debug("enabled source %s\n", source->source.name);
 	}
 }
 
@@ -451,7 +451,7 @@ static void fg_relax(struct fg_wakeup_source *source)
 {
 	if (__test_and_clear_bit(0, &source->enabled)) {
 		__pm_relax(&source->source);
-		pr_debug("disabled source %s\n", source->source.name);
+		//pr_debug("disabled source %s\n", source->source.name);
 	}
 }
 
